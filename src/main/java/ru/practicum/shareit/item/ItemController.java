@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.shareit.item.dto.ItemDto;
 
 import java.util.List;
-/**
- * TODO Sprint add-controllers.
- */
 
 @RestController
 @RequestMapping("/items")

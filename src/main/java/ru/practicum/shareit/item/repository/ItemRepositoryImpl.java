@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 @Qualifier("ItemRepositoryImpl")
 public class ItemRepositoryImpl implements ItemRepository {
 
-    public Map<Long, Item> items;
+    private Map<Long, Item> items;
     private Long currentId;
 
     public ItemRepositoryImpl() {

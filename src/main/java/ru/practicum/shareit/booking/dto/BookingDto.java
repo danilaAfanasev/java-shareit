@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import java.time.LocalDateTime;
-/**
- * TODO Sprint add-controllers.
- */
 
 @Builder(toBuilder = true)
 @Data
