@@ -30,4 +30,32 @@ public class ErrorHandler {
         log.error("Ошибка, объект уже существует: {}", e.getMessage(), e);
         return new ErrorResponse(e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleUnknownDataException(final TimeDataException e) {
+        log.warn("400 {}", e.getMessage());
+        return new ErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleBadRequestException(final BadRequestException e) {
+        log.warn("400 {}", e.getMessage());
+        return new ErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleNotAvailableException(final NotAvailableException e) {
+        log.warn("400 {}", e.getMessage());
+        return new ErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handlerAccessException(final OperationAccessException e) {
+        log.warn("404 {}", e.getMessage());
+        return new ErrorResponse(e.getMessage());
+    }
 }
