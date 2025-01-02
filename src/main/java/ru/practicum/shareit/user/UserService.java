@@ -21,13 +21,11 @@ public class UserService {
         return userMapper.toUserDto(userRepository.save(userMapper.toUser(userDto)));
     }
 
-    @Transactional
     public UserDto findUserById(Long userId) {
         return userMapper.toUserDto(userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(String.format("Пользователь с ID = %d не найден.", userId))));
     }
 
-    @Transactional
     public List<UserDto> findAllUsers() {
         return userRepository.findAll().stream()
                 .map(userMapper::toUserDto)
