@@ -39,7 +39,7 @@ public class BookingService {
                 bookingDtoShort.getEnd().equals(bookingDtoShort.getStart())) {
             throw new TimeDataException(String
                     .format("Некорректное начало времени бронирования = %s  end = %s",
-                            bookingDtoShort.getStart(), bookingDtoShort.getEnd()));
+                                               bookingDtoShort.getStart(), bookingDtoShort.getEnd()));
         }
         User booker = userMapper.toUser(userService.findUserById(bookerId));
         Item item = itemMapper.toItem(itemService.findItemById(bookingDtoShort.getItemId(), bookerId));
