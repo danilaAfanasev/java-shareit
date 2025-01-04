@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PatchMapping("/{userId}")
-    public UserDto save(@Valid @RequestBody UserDto userDto, @PathVariable long userId) {
+    public UserDto save(@RequestBody UserDto userDto, @PathVariable long userId) {
         log.info("Получен PATCH-request: '/users' обновить пользователя с ID = {}", userId);
         return userService.save(userDto, userId);
     }

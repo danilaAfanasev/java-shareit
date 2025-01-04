@@ -51,7 +51,7 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handlerAccessException(final OperationAccessException e) {
         log.warn("404 {}", e.getMessage());
         return ErrorResponse.builder().error(e.getMessage()).build();
