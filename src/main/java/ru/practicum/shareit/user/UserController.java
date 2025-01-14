@@ -1,7 +1,9 @@
 package ru.practicum.shareit.user;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.constraints.Positive;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -9,51 +11,44 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.shareit.item.ItemService;
 import ru.practicum.shareit.user.dto.UserDto;
-
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "/users")
+@RequiredArgsConstructor
+@Slf4j
 public class UserController {
-    private UserService userService;
-    private ItemService itemService;
+    private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService, ItemService itemService) {
-        this.userService = userService;
-        this.itemService = itemService;
-    }
-
-    @ResponseBody
     @PostMapping
     public UserDto create(@Valid @RequestBody UserDto userDto) {
+        log.info("Получен POST-request: '/users' добавить пользователя.");
         return userService.create(userDto);
     }
 
-    @ResponseBody
-    @PatchMapping("/{userId}")
-    public UserDto update(@RequestBody UserDto userDto, @PathVariable Long userId) {
-        return userService.update(userDto, userId);
-    }
-
-    @DeleteMapping("/{userId}")
-    public UserDto delete(@PathVariable Long userId) {
-        UserDto userDto = userService.delete(userId);
-        itemService.deleteItemsByOwner(userId);
-        return userDto;
+    @GetMapping("/{userId}")
+    public UserDto findById(@Positive @PathVariable long userId) {
+        log.info("Получен GET-request: '/users' получить пользователя с ID = {}", userId);
+        return userService.findUserById(userId);
     }
 
     @GetMapping
-    public List<UserDto> getUsers() {
-        return userService.getUsers();
+    public List<UserDto> findAll() {
+        log.info("Получен GET-request: '/users' получить всех пользователей");
+        return userService.findAllUsers();
     }
 
-    @GetMapping("/{userId}")
-    public UserDto getUserById(@PathVariable Long userId) {
-        return userService.getUserById(userId);
+    @PatchMapping("/{userId}")
+    public UserDto save(@RequestBody UserDto userDto, @PathVariable long userId) {
+        log.info("Получен PATCH-request: '/users' обновить пользователя с ID = {}", userId);
+        return userService.save(userDto, userId);
+    }
+
+    @DeleteMapping("/{userId}")
+    public void delete(@PathVariable long userId) {
+        log.info("Получен DELETE-request: '/users' удалить пользователя с ID = {}", userId);
+        userService.delete(userId);
     }
 }

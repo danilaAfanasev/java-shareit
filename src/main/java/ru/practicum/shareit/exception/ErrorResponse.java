@@ -1,5 +1,10 @@
 package ru.practicum.shareit.exception;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Builder
+@Data
 public class ErrorResponse {
     private final String error;
 
