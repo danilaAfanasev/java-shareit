@@ -9,11 +9,10 @@ import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.BookingStatus;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.exception.AlreadyExistsException;
-import ru.practicum.shareit.exception.BadRequestException;
+import ru.practicum.shareit.exception.TimeDataException;
 import ru.practicum.shareit.exception.NotAvailableException;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.exception.OperationAccessException;
-import ru.practicum.shareit.exception.TimeDataException;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.ItemService;
 import ru.practicum.shareit.user.UserService;
@@ -84,7 +83,7 @@ public class BookingServiceImpl implements BookingService {
             case "REJECTED":
                 return BookingMapper.toBookingDto(bookingRepository.findByBookerIdAndStatusIsOrderByStartDesc(userId, BookingStatus.REJECTED));
         }
-        throw new BadRequestException(String.format("Несуществующий state: %s", state));
+        throw new TimeDataException(String.format("Несуществующий state: %s", state));
     }
 
     @Override
@@ -106,7 +105,7 @@ public class BookingServiceImpl implements BookingService {
             case "REJECTED":
                 return BookingMapper.toBookingDto(bookingRepository.findRejectedBookingsOwner(ownerId, BookingStatus.REJECTED));
         }
-        throw new BadRequestException(String.format("Несуществующий state: %s", state));
+        throw new TimeDataException(String.format("Несуществующий state: %s", state));
     }
 
     @Override

@@ -17,13 +17,6 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleBadRequestException(final BadRequestException e) {
-        log.warn("400 {}", e.getMessage());
-        return ErrorResponse.builder().error(e.getMessage()).build();
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidationException(ValidationException e) {
         log.warn("400 {}", e.getMessage(), e);
         return ErrorResponse.builder().error(e.getMessage()).build();

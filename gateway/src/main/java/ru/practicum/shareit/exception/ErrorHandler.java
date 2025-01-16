@@ -53,9 +53,9 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleThrowable(Throwable throwable) {
-        log.error("Unknown error", throwable);
-        return ErrorResponse.builder().error(throwable.getMessage()).build();
+    public ErrorResponse handleThrowable(Exception e) {
+        log.error("Unknown error", e);
+        return ErrorResponse.builder().error(e.getMessage()).build();
     }
 
     @Data
