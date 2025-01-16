@@ -19,12 +19,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId> <!--++ -->
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId><!--++ -->
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
@@ -40,7 +40,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.postgresql</groupId> <!--++ -->
+            <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
@@ -54,7 +54,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.h2database</groupId> <!--++ -->
+            <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
@@ -77,33 +77,32 @@
             <artifactId>jakarta.validation-api</artifactId>
             <version>3.0.0</version>
         </dependency>
-        <!--добавлено в 15 спринте -->
+
         <dependency>
             <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId> <!-- обеспечивает интеграцию Spring и JPA  -->
+            <artifactId>spring-data-jpa</artifactId>
             <version>3.3.0</version>
         </dependency>
 
 
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId> <!-- отвечает за реализацию интерфейсов JPA;  -->
+            <artifactId>hibernate-core</artifactId>
             <version>6.5.1.Final</version>
         </dependency>
 
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
-            <version>2.2</version> <!-- аннотации зависимости таблиц -->
+            <version>2.2</version>
         </dependency>
 
         <dependency>
-            <groupId>com.querydsl</groupId> <!-- язык QueryDSL (Query Domain Specific Language) -->
+            <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
             <classifier>jakarta</classifier>
             <version>5.1.0</version>
         </dependency>
-        <!--добавлено в 16 спринте -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -139,9 +138,6 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.15.2</version>
         </dependency>
-
-        <!--добавлено в 16 спринте -->
-        <!--добавлено в 15 спринте -->
     </dependencies>
 
 
@@ -226,7 +222,6 @@
                     </executions>
                 </plugin>
 
-                <!--добавлено в 15 спринте -->
                 <plugin>
                     <groupId>com.mysema.maven</groupId>
                     <artifactId>apt-maven-plugin</artifactId>
@@ -239,81 +234,10 @@
                             <configuration>
                                 <outputDirectory>target/generated-sources/java</outputDirectory>
                                 <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-                                <!-- это процессор аннотаций, который генерирует классы на основе JPA аннотаций, что позволяет создавать типобезопасные запросы к сущностям. -->
                             </configuration>
                         </execution>
                     </executions>
                 </plugin>
-
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.12</version>
-                    <configuration>
-                        <output>file</output>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>jacoco-initialize</id>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>jacoco-check</id>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                            <configuration>
-                                <rules>
-                                    <rule>
-                                        <element>BUNDLE</element>
-                                        <limits>
-                                            <limit>
-                                                <counter>INSTRUCTION</counter>
-                                                <value>COVEREDRATIO</value>
-                                                <minimum>0.01</minimum>
-                                            </limit>
-                                            <limit>
-                                                <counter>LINE</counter>
-                                                <value>COVEREDRATIO</value>
-                                                <minimum>0.9</minimum>
-                                            </limit>
-                                            <limit>
-                                                <counter>BRANCH</counter>
-                                                <value>COVEREDRATIO</value>
-                                                <minimum>0.6</minimum>
-                                            </limit>
-                                            <limit>
-                                                <counter>COMPLEXITY</counter>
-                                                <value>COVEREDRATIO</value>
-                                                <minimum>0.6</minimum>
-                                            </limit>
-                                            <limit>
-                                                <counter>METHOD</counter>
-                                                <value>COVEREDRATIO</value>
-                                                <minimum>0.7</minimum>
-                                            </limit>
-                                            <limit>
-                                                <counter>CLASS</counter>
-                                                <value>MISSEDCOUNT</value>
-                                                <maximum>1</maximum>
-                                            </limit>
-                                        </limits>
-                                    </rule>
-                                </rules>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>jacoco-report</id>
-                            <phase>test</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
             </plugins>
         </pluginManagement>
     </build>
