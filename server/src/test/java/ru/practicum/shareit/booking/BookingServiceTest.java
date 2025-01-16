@@ -16,7 +16,7 @@ import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.BookingStatus;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.exception.AlreadyExistsException;
-import ru.practicum.shareit.exception.BadRequestException;
+import ru.practicum.shareit.exception.TimeDataException;
 import ru.practicum.shareit.exception.NotAvailableException;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.exception.OperationAccessException;
@@ -166,7 +166,7 @@ class BookingServiceTest {
     void getAllBookingsByUserIdWhenStateIsUnknownThenReturnedBadRequestException() {
         Mockito.when(userService.findUserById(anyLong()))
                 .thenReturn(userDto);
-        Exception e = assertThrows(BadRequestException.class,
+        Exception e = assertThrows(TimeDataException.class,
                 () -> bookingService.findAllBookingsByUser("aaaaa", 1L));
 
         assertEquals(e.getMessage(), "Несуществующий state: aaaaa");
@@ -176,7 +176,7 @@ class BookingServiceTest {
     void getAllBookingsByOwnerIdWhenStateIsUnknownThenReturnedBadRequestException() {
         Mockito.when(userService.findUserById(anyLong()))
                 .thenReturn(userDto);
-        Exception e = assertThrows(BadRequestException.class,
+        Exception e = assertThrows(TimeDataException.class,
                 () -> bookingService.findAllBookingsByOwner("aaaaa", 1L));
 
         assertEquals(e.getMessage(), "Несуществующий state: aaaaa");
